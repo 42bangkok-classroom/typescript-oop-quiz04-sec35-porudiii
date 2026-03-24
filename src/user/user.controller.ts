@@ -1,6 +1,16 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  Post,
+  UsePipes,
+  ValidationPipe,
+  Body,
+} from '@nestjs/common';
 import { IUser } from './user.interface';
 import { UserService } from './user.service';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -29,5 +39,10 @@ export class UserController {
     }
 
     return this.userService.findOne(id, fieldArray);
+  }
+  @Post()
+  @UsePipes(new ValidationPipe())
+  create(@Body() dto: CreateUserDto) {
+    return this.userService.create(dto);
   }
 }

@@ -50,9 +50,11 @@ export class UserService {
 
     const newUser: IUser = {
       id: (lastId + 1).toString(),
-      ...dto,
+      firstName: dto.firstName,
+      lastName: dto.lastName,
+      username: dto.username,
+      email: dto.email,
     };
-
     const updatedUsers = [...users, newUser];
 
     fs.writeFileSync(this.filePath, JSON.stringify(updatedUsers, null, 2));

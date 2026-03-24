@@ -18,7 +18,7 @@ export class UserService {
 
   findOne(id: string, fields?: string[]): Partial<IUser> {
     const users = this.findAll();
-    const user = users.find((u) => u.id === +id);
+    const user = users.find((u) => u.id === id);
 
     if (!user) {
       throw new NotFoundException('User Not Found');
@@ -34,7 +34,7 @@ export class UserService {
 
     fields.forEach((field) => {
       if (field in user) {
-        result[field as keyof IUser] = field[field as keyof IUser];
+        result[field as keyof IUser] = user[field as keyof IUser];
       }
     });
 

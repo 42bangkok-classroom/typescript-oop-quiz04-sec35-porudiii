@@ -16,8 +16,18 @@ export class UserController {
     return this.userService.findAll();
   }
   @Get(':id')
-  findOne(@Param('id') id: string, @Query('fields') fields?: string) {
-    const fieldArray = fields ? fields.split(';') : undefined;
+  findOne(
+    @Param('id') id: string,
+    @Query('fields') fields?: string | string[],
+  ) {
+    let fieldArray: string[] | undefined;
+
+    if (typeof fields === 'string') {
+      fieldArray = fields.split(',');
+    } else if (Array.isArray(fields)) {
+      fieldArray = fields;
+    }
+
     return this.userService.findOne(id, fieldArray);
   }
 }

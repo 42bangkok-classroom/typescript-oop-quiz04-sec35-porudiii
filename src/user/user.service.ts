@@ -33,8 +33,9 @@ export class UserService {
     const result: Partial<IUser> = {};
 
     fields.forEach((field) => {
-      if (field in user) {
-        result[field as keyof IUser] = user[field as keyof IUser];
+      const key = field as keyof IUser;
+      if (user[key] !== undefined) {
+        result[key] = user[key];
       }
     });
 

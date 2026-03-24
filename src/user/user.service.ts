@@ -5,7 +5,7 @@ import * as path from 'path';
 
 @Injectable()
 export class UserService {
-  private filePath = path.join(process.cwd(), 'data', 'user.json');
+  private filePath = path.join(process.cwd(), 'data', 'users.json');
 
   test(): IUser[] {
     return [];
